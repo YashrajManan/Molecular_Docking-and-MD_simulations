@@ -1,0 +1,20 @@
+# data (fetched fresh from RCSB/PubChem each run) + large MD outputs
+data/
+results/md/*.xtc
+results/md/*.trr
+results/md/*.cpt
+results/md/*.gro
+results/md/*.tpr
+
+# learning / private teaching files (not portfolio deliverables)
+WORKFLOW.md
+PROJECT_NARRATIVE.md
+INTERVIEW_QA.md
+INTERPRETATION.md
+MolecularDockingMD_Learning_Compendium.pdf
+docking_md_pipeline*.png
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
