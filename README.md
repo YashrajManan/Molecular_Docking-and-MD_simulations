@@ -100,17 +100,14 @@ best-evidenced lead, not run indiscriminately across a library.
 
 ## Learning through project
 
-The real bugs in this project clustered at file-format boundaries, not inside any single tool's own math: a
-structure's own real co-crystallized ligand silently leaking into a protein-only PDB and breaking `pdb2gmx`;
-non-idempotent topology-mutation steps (`gmx solvate` appends rather than overwrites) causing duplicate-atom
-errors on re-run; and, most persistently, AutoDock/Vina's PDBQT format silently dropping nonpolar hydrogens on
-conversion to plain PDB, which crashed ACPYPE's ligand-topology build in a way that looked like a charge
-problem but wasn't — the real fix was rebuilding each ligand's correct bond graph from its own verified SMILES
-rather than trusting a bond graph guessed from incomplete 3D coordinates, and that fix had to be generalized
-to look up an arbitrary screening winner's SMILES dynamically, since the Ebola library's final candidate
-isn't known until the funnel itself ranks it. The project also surfaced a real, honest data-availability gap
-rather than a bug: only 7 of 15 ADMET/similarity-shortlisted compounds actually had a usable real 3D structure
-on PubChem, handled by disclosing and skipping rather than forcing a fixed count.
+The hardest problems in this project clustered at file-format boundaries, not inside any single tool's own
+math — a symptom that looks like one kind of problem (a charge calculation failing) can actually be a
+format-conversion step silently dropping or rearranging information earlier in the pipeline, and the fix is
+to verify the structure itself at each boundary (the real atom list, the real bond graph, rebuilt from a
+verified source like SMILES rather than guessed from incomplete coordinates) instead of chasing the
+symptom where it appears. The project also surfaced a real, honest data-availability gap: not every
+shortlisted compound had a usable real 3D structure available, handled by disclosing and skipping rather
+than forcing a fixed count.
 
 ## Caveats
 
